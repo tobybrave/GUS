@@ -8,7 +8,7 @@ import { CgMenu, CgClose } from 'react-icons/cg';
 export function Logo(props) {
   return (
     <Box {...props}>
-      <Text fontSize="lg" fontWeight="bold">Logo</Text>
+      <Text fontSize="lg" fontWeight="bold">GUS🍧</Text>
     </Box>
   );
 }
@@ -64,9 +64,8 @@ export function NavBarContainer({ children, ...props }) {
       justify="space-between"
       wrap="wrap"
       w="100%"
-      boxShadow="md"
       // mb={8}
-      p={7}
+      p={5}
       // bg={['primary.500', 'primary.500', 'transparent', 'transparent']} initial bg and color
       // color={['white', 'white', 'primary.700', 'primary.700']} #1b2d38
       bg={['white', 'white', 'transparent', 'transparent']}
