@@ -100,7 +100,7 @@ function ContactForm() {
         Submit your name and number to be compiled for download by
         yourself and others
       </Text>
-      <Box maxWidth="80%" borderRadius="md" m={5}>
+      <Box id="register" maxWidth="80%" borderRadius="md" m={5}>
         <FormControl m={2}>
           <FormLabel htmlFor="name">
             <Text fontWeight="semibold">Name</Text>

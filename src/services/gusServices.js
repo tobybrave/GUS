@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { saveAs } from 'file-saver';
 
-const baseUrl = 'http://localhost:5000/api';
+const baseUrl = 'http://localhost:5000/api/v1';
 let token;
 const setToken = (newToken) => {
   token = `Bearer ${newToken}`;

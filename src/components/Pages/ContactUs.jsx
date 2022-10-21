@@ -5,7 +5,7 @@ import React from 'react';
 import { FaFacebook, FaTwitter } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
 
-function Cont() {
+function ContactUs() {
   return (
     <Box className="App">
       <Box m={3}>
@@ -36,4 +36,4 @@ function Cont() {
   );
 }
 
-export default Cont;
+export default ContactUs;

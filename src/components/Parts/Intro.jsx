@@ -5,10 +5,13 @@ import {
   Center,
   Divider,
   Heading,
+  HStack,
   Image,
+  Link,
   Text,
 } from '@chakra-ui/react';
 import { FaDownload, FaEdit } from 'react-icons/fa';
+import { Link as ReactLink } from 'react-router-dom';
 
 function Intro() {
   return (
@@ -22,15 +25,21 @@ function Intro() {
         other participants get to save each others contact in just one
         click
       </Text>
-      <Button margin="3">
-        <FaDownload />
-        Download
-      </Button>
-      <Button margin="3">
-        <FaEdit />
-        Submit
-      </Button>
+      <Center>
+        <HStack spacing={3} m={3}>
+          <Link as={ReactLink} to="/downloads">
+            <Button leftIcon={<FaDownload />} variant="solid">
+              Download
+            </Button>
+          </Link>
+          <Link href="#register">
+            <Button leftIcon={<FaEdit />} variant="solid">
+              Register
+            </Button>
+          </Link>
+        </HStack>
 
+      </Center>
       <Center>
         <Box margin="6" boxSize="sm" backgroundColor="gray.100">
           <Center>
