@@ -1,34 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { Box } from '@chakra-ui/react';
 import ReportContact from '../Parts/ReportContact';
-import Blocked from '../Parts/Blocked';
 import Benefits from '../Parts/Benefits';
-import PackageDiff from '../Parts/PackageDiff';
-import ContactForm from '../Parts/ContactForm';
-import Intro from '../Parts/Intro';
+import PackagesDiff from '../Parts/Packages';
 import Procedures from '../Parts/Procedures';
 import Share from '../Parts/Share';
 import * as gusServices from '../../services/gusServices';
+import CallToActionWithIllustration from '../Parts/CTA';
+import Blacklisted from '../Parts/Blacklisted';
 
 function Home() {
-  const [blockedContacts, setBlockedContact] = useState([]);
+  const [blacklisted, setBlacklisted] = useState([]);
 
   useEffect(() => {
-    gusServices.blocked()
-      .then((result) => setBlockedContact(result.contacts))
+    gusServices.blacklisted()
+      .then((result) => setBlacklisted(result.contacts))
       .catch((err) => console.error(err));
   }, []);
 
   return (
     <Box className="App">
-      <Intro />
+      <CallToActionWithIllustration />
       <Benefits />
-      <PackageDiff />
+      <PackagesDiff />
       <Procedures />
-      <ContactForm />
       <Share />
-      {blockedContacts.length >= 1 && (
-      <Blocked contacts={blockedContacts} />
+      {blacklisted.length >= 1 && (
+      <Blacklisted contacts={blacklisted} />
       )}
       <ReportContact />
     </Box>

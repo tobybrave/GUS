@@ -9,7 +9,7 @@ import {
 function Procedures() {
   return (
     <Box m={5} mb={10}>
-      <Heading textAlign="left" as="h3" size="md" margin="1">
+      <Heading textAlign="left" as="h3" fontSize="3xl" fontWeight={600} margin="1">
         Procedures
       </Heading>
       <SimpleGrid

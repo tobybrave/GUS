@@ -12,7 +12,7 @@ const config = (tokenValue) => ({
 });
 
 export const register = async (customer) => {
-  const response = await axios.post(`${baseUrl}/auth`, customer);
+  const response = await axios.post(`${baseUrl}/register`, customer);
   localStorage.setItem('gus-customer', JSON.stringify(response.data.user));
   setToken(response.data.user.token);
 
@@ -45,9 +45,9 @@ export const getVcard = async (id, pass) => {
   saveAs(blob, fileName);
 };
 
-export const blocked = async () => {
+export const blacklisted = async () => {
   const response = await axios.get(
-    'http://localhost:5000/api/contacts/reported',
+    `${baseUrl}/contacts/blacklisted`,
   );
   return response.data;
 };

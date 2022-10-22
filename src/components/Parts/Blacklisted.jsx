@@ -1,5 +1,5 @@
 import {
-  Box, Table, TableContainer, Tbody, Td, Text, Tr,
+  Box, Heading, Table, TableContainer, Tbody, Td, Text, Tr,
 } from '@chakra-ui/react';
 import React from 'react';
 
@@ -35,20 +35,24 @@ function BlockedContactTable({ contacts }) {
   );
 }
 
-function Blocked({ contacts }) {
+function Blacklisted({ contacts }) {
   return (
-    <section className="mini-box-share">
-      <div className="wrap mt300">
-        <h1 className="left-align">Blocked Contacts</h1>
-        <p className="left-align b600">
-          Here is a list of the last 5 blocked contacts who have been
-          found violating our rules and will therefore not be included
-          in future compilations
-        </p>
-        <BlockedContactTable contacts={contacts} />
-      </div>
-    </section>
+    <Box m={5}>
+      <Heading
+        fontWeight={600}
+        fontSize="3xl"
+        textAlign="left"
+      >
+        Blacklisted Contacts
+      </Heading>
+      <Text color="gray.500" mt={3}>
+        Here is a list of the last 5 blocked contacts who have been
+        found violating our rules and will therefore not be included
+        in future compilations
+      </Text>
+      <BlockedContactTable contacts={contacts} />
+    </Box>
   );
 }
 
-export default Blocked;
+export default Blacklisted;

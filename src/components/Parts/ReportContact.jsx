@@ -59,10 +59,10 @@ function ReportContact() {
 
   return (
     <Box m={5}>
-      <Heading textAlign="left" as="h3" size="md">
+      <Heading textAlign="left" as="h3" fontSize="3xl" fontWeight={600}>
         Report Contact
       </Heading>
-      <Text textAlign="left" fontWeight="hairline">
+      <Text textAlign="left" fontWeight="hairline" color="gray.500" mt={3}>
         If you think any GUS contact has acted badly and you want us to
         look into it, kindly submit their phone number here
       </Text>

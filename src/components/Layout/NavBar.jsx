@@ -45,6 +45,7 @@ export function MenuLinks({ isOpen }) {
         pt={[4, 4, 0, 0]}
       >
         <MenuItem to="/">Home</MenuItem>
+        <MenuItem to="/register">Register</MenuItem>
         <MenuItem to="/downloads">Downloads</MenuItem>
         <MenuItem to="/how-to-install">How to Install</MenuItem>
         <MenuItem to="/terms-of-service">Terms of service</MenuItem>
