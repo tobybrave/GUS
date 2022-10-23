@@ -303,7 +303,7 @@ function Downloads() {
           page={page}
           setPage={setPage}
         />
-      )) || <Text>No available downloads</Text>}
+      )) || <Text m={3}>No available downloads</Text>}
     </Box>
   );
 }
