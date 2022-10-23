@@ -8,7 +8,7 @@ function Installation() {
     <Box>
       <Box m={3} p={3}>
         <Stack align="center" m={5}>
-          <Heading id="register" fontSize="2xl" textAlign="center">
+          <Heading id="installation" fontSize="2xl" textAlign="center">
             How to install the VCF file
           </Heading>
           <Text fontSize="lg" color="gray.600">
