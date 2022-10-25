@@ -31,8 +31,10 @@ import {
   HStack,
   useColorModeValue,
   Flex,
-
   createIcon,
+  Alert,
+  AlertIcon,
+  AlertDescription,
 } from '@chakra-ui/react';
 import * as gusServices from '../../services/gusServices';
 
@@ -86,35 +88,21 @@ function DownloadTable({ availableDownloads, page, setPage }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [password, setPassword] = useState('');
   const [vcardId, setVcardId] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const initialRef = useRef(null);
-  const toast = useToast();
 
   const handleDownload = (id) => {
     gusServices
       .getVcard(id, password)
-      .then(onClose)
+      .then(() => {
+        setErrorMessage('');
+        onClose();
+      })
       .catch((err) => {
         if (err.response?.status === 400) {
-          if (!toast.isActive(id)) {
-            toast({
-              id,
-              status: 'error',
-              title: 'Incorrect password',
-              duration: 10000,
-              isClosable: true,
-              position: 'top',
-            });
-          }
+          setErrorMessage('Please provide a valid password. If you continue to have issues downloading contact, contact our Support team');
         } else {
-          toast({
-            status: 'error',
-            title: 'An error occured',
-            description:
-                            'Invalid user details. Kindly verify if you are registered',
-            duration: 10000,
-            isClosable: true,
-            position: 'top',
-          });
+          setErrorMessage('Invalid user details. Kindly verify if you are registered');
         }
       });
   };
@@ -164,6 +152,14 @@ function DownloadTable({ availableDownloads, page, setPage }) {
           <ModalHeader>Unlock vcard download</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
+            { errorMessage && (
+            <Alert mb={2} status="error" variant="left-accent">
+              <AlertIcon />
+              <AlertDescription>
+                {errorMessage}
+              </AlertDescription>
+            </Alert>
+            )}
             <FormControl>
               <FormLabel fontWeight="semibold">
                 GUS password
@@ -194,7 +190,13 @@ function DownloadTable({ availableDownloads, page, setPage }) {
             >
               Unlock Download
             </Button>
-            <Button onClick={onClose}>Cancel</Button>
+            <Button onClick={() => {
+              setErrorMessage('');
+              onClose();
+            }}
+            >
+              Cancel
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
