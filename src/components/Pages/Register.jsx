@@ -17,8 +17,10 @@ import {
   InputRightElement,
   Stack,
   useColorModeValue,
+  Select,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import * as yup from 'yup';
 import 'yup-phone';
@@ -32,9 +34,13 @@ function Register() {
   const [showAlert, setShowAlert] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [country, setCountry] = useState('NG');
+  const [serverError, setServerError] = useState(false);
+
+  const navigate = useNavigate();
   const toast = useToast();
 
   const signInFormSchema = yup.object().shape({
+    package: yup.mixed().oneOf(['free', 'premium']).default('free').required(),
     name: yup.string().min(3, 'Name must be at least 3 characters').max(50, 'Name cannot be more than 50 characters').required('Name is required'),
     phone: yup.string().phone(country, true, 'Please enter a valid phone number').required('Phone number is required'),
     password: yup.string().required('A password is required'),
@@ -45,6 +51,7 @@ function Register() {
   } = useForm({
     resolver: yupResolver(signInFormSchema),
     defaultValues: {
+      package: 'free',
       name: '',
       phone: '',
       password: '',
@@ -54,10 +61,10 @@ function Register() {
   const handleRegister = async (values) => {
     const formatPhoneNumber = Number.parseInt(values.phone, 10);
     const user = {
-      ...values,
+      name: values.name,
       phone: `${data[country]}${formatPhoneNumber}`,
+      password: values.password,
     };
-
     gusServices
       .register(user)
       .then((response) => {
@@ -73,10 +80,14 @@ function Register() {
         }
         setShowAlert(true);
         setCountry(country);
+        if (values.package === 'premium') {
+          navigate('/go-premium');
+        }
       })
       .catch((err) => {
+        setServerError(true);
         toast({
-          title: err.response.data?.message || err.message,
+          title: err.response?.data?.message || err.message,
           status: 'error',
           variant: 'subtle',
           duration: 7000,
@@ -86,12 +97,8 @@ function Register() {
   };
 
   useEffect(() => {
-    if (formState.isSubmitSuccessful) {
-      reset({
-        name: '',
-        phone: '',
-        password: '',
-      });
+    if (formState.isSubmitted && formState.isSubmitSuccessful && !serverError) {
+      reset();
     }
   }, [formState, reset]);
 
@@ -143,6 +150,23 @@ function Register() {
             onSubmit={handleSubmit(handleRegister)}
           >
             <Stack spacing={4}>
+              <FormControl id="package" isInvalid={!!errors.package}>
+                <FormLabel>Package</FormLabel>
+                <Select
+                  bg="gray.100"
+                  color="gray.500"
+                  _placeholder={{
+                    color: 'gray.500',
+                  }}
+                  {...register('package')}
+                >
+                  <option value="free">Free</option>
+                  <option value="premium">Premium</option>
+                </Select>
+                {!!errors.package && (
+                  <FormErrorMessage>{errors.package.message}</FormErrorMessage>
+                )}
+              </FormControl>
 
               <FormControl id="name" isInvalid={!!errors.name}>
                 <FormLabel>Name</FormLabel>
