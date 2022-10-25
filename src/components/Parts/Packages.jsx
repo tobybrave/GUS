@@ -166,7 +166,7 @@ export default function PackagesDiff() {
             features: [
               'Unlimited downloads',
               'For Businesses',
-              'All feature',
+              'All features',
             ],
           }}
           icon={SiMarketo}

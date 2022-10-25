@@ -6,7 +6,6 @@ import {
   Box,
   Button,
   FormControl,
-  // FormHelperText,
   FormLabel,
   Heading,
   Input,
@@ -19,7 +18,7 @@ import {
   Stack,
   useColorModeValue,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import * as yup from 'yup';
 import 'yup-phone';
@@ -30,10 +29,7 @@ import * as gusServices from '../../services/gusServices';
 import data from '../Parts/data';
 
 function Register() {
-  // const [name, setName] = useState('');
-  // const [phone, setPhone] = useState('');
   const [showAlert, setShowAlert] = useState(false);
-  // const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [country, setCountry] = useState('NG');
   const toast = useToast();
@@ -45,16 +41,21 @@ function Register() {
   });
 
   const {
-    register, handleSubmit, formState: { errors }, formState,
+    register, reset, handleSubmit, formState: { errors }, formState,
   } = useForm({
     resolver: yupResolver(signInFormSchema),
+    defaultValues: {
+      name: '',
+      phone: '',
+      password: '',
+    },
   });
 
   const handleRegister = async (values) => {
+    const formatPhoneNumber = Number.parseInt(values.phone, 10);
     const user = {
-      name: values.name,
-      password: values.password,
-      phone: `${data[country]}${values.phone}`,
+      ...values,
+      phone: `${data[country]}${formatPhoneNumber}`,
     };
 
     gusServices
@@ -72,12 +73,8 @@ function Register() {
         }
         setShowAlert(true);
         setCountry(country);
-        useForm();
-        // setName('');
-        // setPhone('');
       })
       .catch((err) => {
-        console.error(err);
         toast({
           title: err.response.data?.message || err.message,
           status: 'error',
@@ -88,29 +85,18 @@ function Register() {
       });
   };
 
+  useEffect(() => {
+    if (formState.isSubmitSuccessful) {
+      reset({
+        name: '',
+        phone: '',
+        password: '',
+      });
+    }
+  }, [formState, reset]);
+
   return (
     <Box m={5}>
-      {showAlert && (
-        <Alert
-          status="success"
-          variant="subtle"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          textAlign="center"
-          height="200px"
-          borderRadius="md"
-          my={10}
-        >
-          <AlertIcon boxSize="40px" mr={0} />
-          <AlertTitle mt={4} mb={1} fontSize="lg">
-            Registration successful!
-          </AlertTitle>
-          <AlertDescription maxWidth="sm">
-            Account successfully created.
-          </AlertDescription>
-        </Alert>
-      )}
       <Flex
         minH="100vh"
         align="center"
@@ -118,9 +104,30 @@ function Register() {
         bg={useColorModeValue('gray.50', 'gray.800')}
       >
         <Stack spacing={8} mx="auto" maxW="lg" py={12} px={6}>
+          {showAlert && (
+          <Alert
+            status="success"
+            variant="subtle"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            textAlign="center"
+            height="150px"
+            borderRadius="md"
+            my={5}
+          >
+            <AlertIcon boxSize="40px" mr={0} />
+            <AlertTitle mt={4} mb={1} fontSize="lg">
+              Registration successful!
+            </AlertTitle>
+            <AlertDescription maxWidth="sm">
+              Account successfully created.
+            </AlertDescription>
+          </Alert>
+          )}
           <Stack align="center">
             <Heading id="register" fontSize="2xl" textAlign="center">
-              Submit your name and number
+              Submit your contact
             </Heading>
             <Text fontSize="lg" color="gray.600">
               Submit your name and number to be compiled for download by
