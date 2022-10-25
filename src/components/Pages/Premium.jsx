@@ -59,7 +59,7 @@ function PremiumPlan() {
           },
         ],
       },
-      key: 'pk_test_3baa29676132d0f704cc5a21a3a764d9697fc606',
+      key: 'pk_live_8237ba59e110f2e08205ae7c5035b130ab56e0b3',
       amount: 2000 * 100,
       onCancel: () => {
         toast({
@@ -74,10 +74,10 @@ function PremiumPlan() {
       onSuccess: (transaction) => {
         const message = `Payment complete! Reference: ${transaction.reference}`;
 
-        fetch(`http://localhost:5000/api/payment/verify/${transaction.reference}`).then((res) => res.json()).then(console.log).catch(console.error);
-        alert(message);
+        fetch(`http://localhost:5000/api/payment/verify/${transaction.reference}`).then((res) => res.json());
+
         toast({
-          title: 'message',
+          title: message,
           position: 'top',
           status: 'success',
           variant: 'subtle',
