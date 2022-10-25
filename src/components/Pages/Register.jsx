@@ -6,7 +6,6 @@ import {
   Box,
   Button,
   FormControl,
-  // FormHelperText,
   FormLabel,
   Heading,
   Input,
@@ -18,8 +17,10 @@ import {
   InputRightElement,
   Stack,
   useColorModeValue,
+  Select,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import * as yup from 'yup';
 import 'yup-phone';
@@ -30,33 +31,40 @@ import * as gusServices from '../../services/gusServices';
 import data from '../Parts/data';
 
 function Register() {
-  // const [name, setName] = useState('');
-  // const [phone, setPhone] = useState('');
   const [showAlert, setShowAlert] = useState(false);
-  // const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [country, setCountry] = useState('NG');
+  const [serverError, setServerError] = useState(false);
+
+  const navigate = useNavigate();
   const toast = useToast();
 
   const signInFormSchema = yup.object().shape({
+    package: yup.mixed().oneOf(['free', 'premium']).default('free').required(),
     name: yup.string().min(3, 'Name must be at least 3 characters').max(50, 'Name cannot be more than 50 characters').required('Name is required'),
     phone: yup.string().phone(country, true, 'Please enter a valid phone number').required('Phone number is required'),
     password: yup.string().required('A password is required'),
   });
 
   const {
-    register, handleSubmit, formState: { errors }, formState,
+    register, reset, handleSubmit, formState: { errors }, formState,
   } = useForm({
     resolver: yupResolver(signInFormSchema),
+    defaultValues: {
+      package: 'free',
+      name: '',
+      phone: '',
+      password: '',
+    },
   });
 
   const handleRegister = async (values) => {
+    const formatPhoneNumber = Number.parseInt(values.phone, 10);
     const user = {
       name: values.name,
+      phone: `${data[country]}${formatPhoneNumber}`,
       password: values.password,
-      phone: `${data[country]}${values.phone}`,
     };
-
     gusServices
       .register(user)
       .then((response) => {
@@ -72,14 +80,14 @@ function Register() {
         }
         setShowAlert(true);
         setCountry(country);
-        useForm();
-        // setName('');
-        // setPhone('');
+        if (values.package === 'premium') {
+          navigate('/go-premium');
+        }
       })
       .catch((err) => {
-        console.error(err);
+        setServerError(true);
         toast({
-          title: err.response.data?.message || err.message,
+          title: err.response?.data?.message || err.message,
           status: 'error',
           variant: 'subtle',
           duration: 7000,
@@ -88,29 +96,14 @@ function Register() {
       });
   };
 
+  useEffect(() => {
+    if (formState.isSubmitted && formState.isSubmitSuccessful && !serverError) {
+      reset();
+    }
+  }, [formState, reset]);
+
   return (
     <Box m={5}>
-      {showAlert && (
-        <Alert
-          status="success"
-          variant="subtle"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          textAlign="center"
-          height="200px"
-          borderRadius="md"
-          my={10}
-        >
-          <AlertIcon boxSize="40px" mr={0} />
-          <AlertTitle mt={4} mb={1} fontSize="lg">
-            Registration successful!
-          </AlertTitle>
-          <AlertDescription maxWidth="sm">
-            Account successfully created.
-          </AlertDescription>
-        </Alert>
-      )}
       <Flex
         minH="100vh"
         align="center"
@@ -118,9 +111,30 @@ function Register() {
         bg={useColorModeValue('gray.50', 'gray.800')}
       >
         <Stack spacing={8} mx="auto" maxW="lg" py={12} px={6}>
+          {showAlert && (
+          <Alert
+            status="success"
+            variant="subtle"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            textAlign="center"
+            height="150px"
+            borderRadius="md"
+            my={5}
+          >
+            <AlertIcon boxSize="40px" mr={0} />
+            <AlertTitle mt={4} mb={1} fontSize="lg">
+              Registration successful!
+            </AlertTitle>
+            <AlertDescription maxWidth="sm">
+              Account successfully created.
+            </AlertDescription>
+          </Alert>
+          )}
           <Stack align="center">
             <Heading id="register" fontSize="2xl" textAlign="center">
-              Submit your name and number
+              Submit your contact
             </Heading>
             <Text fontSize="lg" color="gray.600">
               Submit your name and number to be compiled for download by
@@ -136,6 +150,23 @@ function Register() {
             onSubmit={handleSubmit(handleRegister)}
           >
             <Stack spacing={4}>
+              <FormControl id="package" isInvalid={!!errors.package}>
+                <FormLabel>Package</FormLabel>
+                <Select
+                  bg="gray.100"
+                  color="gray.500"
+                  _placeholder={{
+                    color: 'gray.500',
+                  }}
+                  {...register('package')}
+                >
+                  <option value="free">Free</option>
+                  <option value="premium">Premium</option>
+                </Select>
+                {!!errors.package && (
+                  <FormErrorMessage>{errors.package.message}</FormErrorMessage>
+                )}
+              </FormControl>
 
               <FormControl id="name" isInvalid={!!errors.name}>
                 <FormLabel>Name</FormLabel>

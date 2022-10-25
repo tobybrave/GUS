@@ -25,6 +25,7 @@ export const getUser = () => {
   if (customer) {
     setToken(customer.token);
   }
+  return customer;
 };
 
 export const getVcards = async () => axios.get(`${baseUrl}/vcards`);
@@ -46,8 +47,6 @@ export const getVcard = async (id, pass) => {
 };
 
 export const blacklisted = async () => {
-  const response = await axios.get(
-    `${baseUrl}/contacts/blacklisted`,
-  );
+  const response = await axios.get(`${baseUrl}/contacts/blacklisted`);
   return response.data;
 };

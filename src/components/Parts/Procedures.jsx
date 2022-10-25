@@ -25,8 +25,7 @@ function Procedures() {
           <Text fontWeight="semibold">Select Plan</Text>
           <Text>
             Choose between the free plan and the premium plan
-            according to what best suits your needs. Remember that
-            the premium plan has more to offer
+            according to what best suits your needs.
           </Text>
         </Box>
         <Box height="auto" bg="whitesmoke" borderRadius="md" p={2}>
@@ -37,8 +36,8 @@ function Procedures() {
             Fill in correct information
           </Text>
           <Text>
-            Fill in your correct information when submitting your
-            contact information to ensure that you get the best out
+            Fill in your correct details when submitting your
+            contact to ensure that you get the best out
             of our services
           </Text>
         </Box>
@@ -48,9 +47,8 @@ function Procedures() {
           </Center>
           <Text fontWeight="semibold">Secure you password</Text>
           <Text>
-            After your successful payment, you will be given a
-            unique password which will be required to download the
-            contact file
+            Provide your password to unlock every single vcard
+            file when you are reaady to do so
           </Text>
         </Box>
         <Box height="auto" bg="whitesmoke" borderRadius="md" p={2}>
@@ -58,11 +56,11 @@ function Procedures() {
             <FaAddressCard size={20} />
           </Center>
           <Text fontWeight="semibold">
-            Download the compiled contact
+            Download compiled contacts
           </Text>
           <Text>
-            Come back to Download and install the contact file which
-            will be uploaded by 11:55pm in a .vcf format. This
+            Download the contact file which
+            will be uploaded daily in a .vcf format. This
             contact file will also be saved by others
           </Text>
         </Box>
