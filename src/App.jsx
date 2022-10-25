@@ -8,8 +8,9 @@ import Downloads from './components/Pages/Downloads';
 import Installation from './components/Pages/Installation';
 // import Terms from './components/Parts/Terms'
 import ContactUs from './components/Pages/ContactUs';
-import './App.css';
 import Register from './components/Pages/Register';
+import Premium from './components/Pages/Premium';
+import './App.css';
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="register" element={<Register />} />
+        <Route path="go-premium" element={<Premium />} />
+
         <Route path="downloads" element={<Downloads />} />
         <Route path="how-to-install" element={<Installation />} />
         {/* <Route path="terms-of-service" element={<Terms />} /> */}

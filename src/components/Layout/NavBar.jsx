@@ -46,6 +46,7 @@ export function MenuLinks({ isOpen }) {
       >
         <MenuItem to="/">Home</MenuItem>
         <MenuItem to="/register">Register</MenuItem>
+        <MenuItem to="/go-premium">Go Premium</MenuItem>
         <MenuItem to="/downloads">Downloads</MenuItem>
         <MenuItem to="/how-to-install">How to Install</MenuItem>
         <MenuItem to="/terms-of-service">Terms of service</MenuItem>
