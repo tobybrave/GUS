@@ -148,9 +148,13 @@ function PremiumPlan() {
                 <FormLabel>Name</FormLabel>
                 <Input
                   type="text"
+                  disabled
                   placeholder="Enter name"
                   bg="gray.100"
                   color="gray.500"
+                  _disabled={{
+                    color: 'gray.500',
+                  }}
                   _placeholder={{
                     color: 'gray.500',
                   }}
@@ -163,10 +167,14 @@ function PremiumPlan() {
               <FormControl id="phone" isInvalid={!!errors.phone}>
                 <FormLabel>Phone</FormLabel>
                 <Input
+                  disabled
                   type="tel"
                   placeholder="Enter phone number"
                   bg="gray.100"
                   color="gray.500"
+                  _disabled={{
+                    color: 'gray.500',
+                  }}
                   _placeholder={{
                     color: 'gray.500',
                   }}
