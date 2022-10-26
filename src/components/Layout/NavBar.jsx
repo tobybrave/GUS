@@ -22,16 +22,16 @@ export function MenuToggle({ toggle, isOpen }) {
 }
 
 export function MenuItem({
-  children, isLast, to = '/', ...rest
+  children, isLast, to = '/', toggle, ...rest
 }) {
   return (
-    <Link as={RouterLink} to={to}>
+    <Link as={RouterLink} to={to} onClick={toggle}>
       <Text display="block" {...rest}>{children}</Text>
     </Link>
   );
 }
 
-export function MenuLinks({ isOpen }) {
+export function MenuLinks({ isOpen, toggle }) {
   return (
     <Box
       display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
@@ -44,13 +44,13 @@ export function MenuLinks({ isOpen }) {
         direction={['column', 'row', 'row', 'row']}
         pt={[4, 4, 0, 0]}
       >
-        <MenuItem to="/">Home</MenuItem>
-        <MenuItem to="/register">Register</MenuItem>
-        <MenuItem to="/go-premium">Go Premium</MenuItem>
-        <MenuItem to="/downloads">Downloads</MenuItem>
-        <MenuItem to="/how-to-install">How to Install</MenuItem>
-        <MenuItem to="/terms-of-service">Terms of service</MenuItem>
-        <MenuItem to="/contact-us">Contact Us</MenuItem>
+        <MenuItem toggle={toggle} to="/">Home</MenuItem>
+        <MenuItem toggle={toggle} to="/register">Register</MenuItem>
+        <MenuItem toggle={toggle} to="/go-premium">Go Premium</MenuItem>
+        <MenuItem toggle={toggle} to="/downloads">Downloads</MenuItem>
+        <MenuItem toggle={toggle} to="/how-to-install">How to Install</MenuItem>
+        <MenuItem toggle={toggle} to="/terms-of-service">Terms of service</MenuItem>
+        <MenuItem toggle={toggle} to="/contact-us">Contact Us</MenuItem>
 
       </Stack>
     </Box>
@@ -87,7 +87,7 @@ function NavBar() {
     <NavBarContainer>
       <Logo w="100px" color="#1b2d38" />
       <MenuToggle toggle={toggle} isOpen={isOpen} />
-      <MenuLinks isOpen={isOpen} />
+      <MenuLinks toggle={toggle} isOpen={isOpen} />
     </NavBarContainer>
   );
 }
