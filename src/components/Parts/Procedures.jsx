@@ -1,72 +1,67 @@
 import React from 'react';
 import {
-  Box, Center, Heading, SimpleGrid, Text,
+  Heading, Icon, SimpleGrid, Text, VStack,
 } from '@chakra-ui/react';
 import {
   FaAddressCard, FaKey, FaPencilAlt, FaSuitcase,
 } from 'react-icons/fa';
 
-function Procedures() {
+export default function Procedures() {
   return (
-    <Box m={5} mb={10}>
-      <Heading textAlign="left" as="h3" fontSize="3xl" fontWeight={600} margin="1">
+    <section>
+      <Heading textAlign="center" fontWeight={600} fontSize={{ base: '3xl', md: '3xl', lg: '4xl' }}>
         Procedures
       </Heading>
-      <SimpleGrid
-        minChildWidth="180px"
-        spacingX={10}
-        spacingY={5}
-        m="25px"
-      >
-        <Box height="auto" bg="whitesmoke" borderRadius="md" p={2}>
-          <Center>
-            <FaSuitcase size={20} />
-          </Center>
-          <Text fontWeight="semibold">Select Plan</Text>
+      <SimpleGrid gap={5} columns={[1, 1, 2, 4]} px={6} py={8} mx="auto">
+        <VStack spacing={4} align="center">
+          <Icon as={FaSuitcase} h={7} w={7} viewBox="0 0 30 30" />
+          <Heading as="h3" size="md">
+            Select Plan
+          </Heading>
           <Text>
             Choose between the free plan and the premium plan
             according to what best suits your needs.
           </Text>
-        </Box>
-        <Box height="auto" bg="whitesmoke" borderRadius="md" p={2}>
-          <Center>
-            <FaPencilAlt size={20} />
-          </Center>
-          <Text fontWeight="semibold">
-            Fill in correct information
-          </Text>
+        </VStack>
+
+        <VStack spacing={4} align="center">
+          <Icon as={FaPencilAlt} h={7} w={7} viewBox="0 0 30 30" />
+          <Heading as="h3" size="md">
+            Submit contact
+          </Heading>
           <Text>
             Fill in your correct details when submitting your
             contact to ensure that you get the best out
-            of our services
+            of our services.
           </Text>
-        </Box>
-        <Box height="auto" bg="whitesmoke" borderRadius="md" p={2}>
-          <Center>
-            <FaKey size={20} />
-          </Center>
-          <Text fontWeight="semibold">Secure you password</Text>
+        </VStack>
+
+        <VStack spacing={4} align="center">
+          <Icon as={FaKey} h={7} w={7} viewBox="0 0 30 30" />
+
+          <Heading as="h3" size="md">
+            Secure your password
+          </Heading>
+
           <Text>
             Provide your password to unlock every single vcard
-            file when you are reaady to do so
+            file when you are ready to do so.
           </Text>
-        </Box>
-        <Box height="auto" bg="whitesmoke" borderRadius="md" p={2}>
-          <Center>
-            <FaAddressCard size={20} />
-          </Center>
-          <Text fontWeight="semibold">
-            Download compiled contacts
-          </Text>
+        </VStack>
+        <VStack spacing={4} align="center">
+          <Icon as={FaAddressCard} h={7} w={7} viewBox="0 0 30 30" />
+
+          <Heading as="h3" size="md">
+            Download vcards
+          </Heading>
+
           <Text>
             Download the contact file which
             will be uploaded daily in a .vcf format. This
-            contact file will also be saved by others
+            contact file will also be saved by others.
           </Text>
-        </Box>
+        </VStack>
       </SimpleGrid>
-    </Box>
+    </section>
   );
 }
-
-export default Procedures;
