@@ -17,6 +17,7 @@ import {
 
 } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import 'yup-phone';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -27,6 +28,8 @@ import * as gusServices from '../../services/gusServices';
 function PremiumPlan() {
   const [showAlert, setShowAlert] = useState(false);
   const toast = useToast();
+  const navigate = useNavigate();
+
   const signInFormSchema = yup.object().shape({
     name: yup.string().min(3, 'Name must be at least 3 characters').max(50, 'Name cannot be more than 50 characters').required('Name is required'),
     phone: yup.string().phone(undefined, undefined, 'Please enter a valid phone number').required('Phone number is required'),
@@ -51,13 +54,6 @@ function PremiumPlan() {
       ...values,
       metadata: {
         ...values,
-        custom_fields: [
-          {
-            display_name: values.name,
-            variable_name: values.name,
-            value: values.phone,
-          },
-        ],
       },
       key: 'pk_live_8237ba59e110f2e08205ae7c5035b130ab56e0b3',
       amount: 2000 * 100,
@@ -73,9 +69,7 @@ function PremiumPlan() {
       },
       onSuccess: (transaction) => {
         const message = `Payment complete! Reference: ${transaction.reference}`;
-
-        fetch(`http://localhost:5000/api/payment/verify/${transaction.reference}`).then((res) => res.json());
-
+        fetch(`http://localhost:5000/api/payment/verify/${transaction.reference}`);
         toast({
           title: message,
           position: 'top',
@@ -84,6 +78,7 @@ function PremiumPlan() {
           duration: 7000,
           isClosable: true,
         });
+        navigate('/downloads');
       },
     });
   };
@@ -148,9 +143,13 @@ function PremiumPlan() {
                 <FormLabel>Name</FormLabel>
                 <Input
                   type="text"
+                  disabled
                   placeholder="Enter name"
                   bg="gray.100"
                   color="gray.500"
+                  _disabled={{
+                    color: 'gray.500',
+                  }}
                   _placeholder={{
                     color: 'gray.500',
                   }}
@@ -163,10 +162,14 @@ function PremiumPlan() {
               <FormControl id="phone" isInvalid={!!errors.phone}>
                 <FormLabel>Phone</FormLabel>
                 <Input
+                  disabled
                   type="tel"
                   placeholder="Enter phone number"
                   bg="gray.100"
                   color="gray.500"
+                  _disabled={{
+                    color: 'gray.500',
+                  }}
                   _placeholder={{
                     color: 'gray.500',
                   }}

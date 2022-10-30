@@ -6,7 +6,7 @@ import Footer from './components/Layout/Footer';
 import Home from './components/Pages/Home';
 import Downloads from './components/Pages/Downloads';
 import Installation from './components/Pages/Installation';
-// import Terms from './components/Parts/Terms'
+import Terms from './components/Pages/Terms';
 import ContactUs from './components/Pages/ContactUs';
 import Register from './components/Pages/Register';
 import Premium from './components/Pages/Premium';
@@ -22,7 +22,7 @@ function App() {
 
         <Route path="downloads" element={<Downloads />} />
         <Route path="how-to-install" element={<Installation />} />
-        {/* <Route path="terms-of-service" element={<Terms />} /> */}
+        <Route path="terms-of-service" element={<Terms />} />
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="*" element={<Home />} />
       </Route>

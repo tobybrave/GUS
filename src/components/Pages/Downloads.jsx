@@ -35,7 +35,9 @@ import {
   Alert,
   AlertIcon,
   AlertDescription,
+  Link,
 } from '@chakra-ui/react';
+import { useLocation } from 'react-router-dom';
 import * as gusServices from '../../services/gusServices';
 
 const PAGE_SIZE = 10;
@@ -259,12 +261,181 @@ export function QuoteView() {
   );
 }
 
+const NotificationIcon = createIcon({
+  displayName: 'Notification',
+  viewBox: '0 0 128 128',
+  path: (
+    <g id="Notification">
+      <rect
+        className="cls-1"
+        x="1"
+        y="45"
+        fill="#fbcc88"
+        width="108"
+        height="82"
+      />
+      <circle className="cls-2" fill="#8cdd79" cx="105" cy="86" r="22" />
+      <rect
+        className="cls-3"
+        fill="#f6b756"
+        x="1"
+        y="122"
+        width="108"
+        height="5"
+      />
+      <path
+        className="cls-4"
+        fill="#7ece67"
+        d="M105,108A22,22,0,0,1,83.09,84a22,22,0,0,0,43.82,0A22,22,0,0,1,105,108Z"
+      />
+      <path
+        fill="#f6b756"
+        className="cls-3"
+        d="M109,107.63v4A22,22,0,0,1,83.09,88,22,22,0,0,0,109,107.63Z"
+      />
+      <path
+        className="cls-5"
+        fill="#d6ac90"
+        d="M93,30l16,15L65.91,84.9a16,16,0,0,1-21.82,0L1,45,17,30Z"
+      />
+      <path
+        className="cls-6"
+        fill="#cba07a"
+        d="M109,45,65.91,84.9a16,16,0,0,1-21.82,0L1,45l2.68-2.52c43.4,40.19,41.54,39.08,45.46,40.6A16,16,0,0,0,65.91,79.9l40.41-37.42Z"
+      />
+      <path
+        className="cls-7"
+        fill="#dde1e8"
+        d="M93,1V59.82L65.91,84.9a16,16,0,0,1-16.77,3.18C45.42,86.64,47,87.6,17,59.82V1Z"
+      />
+      <path
+        className="cls-8"
+        fill="#c7cdd8"
+        d="M74,56c-3.56-5.94-3-10.65-3-17.55a16.43,16.43,0,0,0-12.34-16,5,5,0,1,0-7.32,0A16,16,0,0,0,39,38c0,7.13.59,12-3,18a3,3,0,0,0,0,6H50.41a5,5,0,1,0,9.18,0H74a3,3,0,0,0,0-6ZM53.2,21.37a3,3,0,1,1,3.6,0,1,1,0,0,0-.42.7,11.48,11.48,0,0,0-2.77,0A1,1,0,0,0,53.2,21.37Z"
+      />
+      <path
+        className="cls-3"
+        fill="#f6b756"
+        d="M46.09,86.73,3,127H1v-1c6-5.62-1.26,1.17,43.7-40.78A1,1,0,0,1,46.09,86.73Z"
+      />
+      <path
+        className="cls-3"
+        fill="#f6b756"
+        d="M109,126v1h-2L63.91,86.73a1,1,0,0,1,1.39-1.49C111,127.85,103.11,120.51,109,126Z"
+      />
+      <path
+        className="cls-8"
+        fill="#c7cdd8"
+        d="M93,54.81v5L65.91,84.9a16,16,0,0,1-16.77,3.18C45.42,86.64,47,87.6,17,59.82v-5L44.09,79.9a16,16,0,0,0,21.82,0Z"
+      />
+      <path
+        className="cls-9"
+        fill="#fff"
+        d="M101,95c-.59,0-.08.34-8.72-8.3a1,1,0,0,1,1.44-1.44L101,92.56l15.28-15.28a1,1,0,0,1,1.44,1.44C100.21,96.23,101.6,95,101,95Z"
+      />
+      <path
+        className="cls-3"
+        fill="#f6b756"
+        d="M56.8,18.38a3,3,0,1,0-3.6,0A1,1,0,0,1,52,20,5,5,0,1,1,58,20,1,1,0,0,1,56.8,18.38Z"
+      />
+      <path
+        className="cls-1"
+        fill="#fbcc88"
+        d="M71,42.17V35.45c0-8.61-6.62-16-15.23-16.43A16,16,0,0,0,39,35c0,7.33.58,12-3,18H74A21.06,21.06,0,0,1,71,42.17Z"
+      />
+      <path
+        className="cls-3"
+        fill="#f6b756"
+        d="M74,53H36a21.36,21.36,0,0,0,1.86-4H72.14A21.36,21.36,0,0,0,74,53Z"
+      />
+      <path className="cls-3" fill="#f6b756" d="M59.59,59a5,5,0,1,1-9.18,0" />
+      <path
+        className="cls-1"
+        fill="#fbcc88"
+        d="M74,59H36a3,3,0,0,1,0-6H74a3,3,0,0,1,0,6Z"
+      />
+    </g>
+  ),
+});
+
+export function ShareCardCTA({ handleShare }) {
+  return (
+    <Box height="100vh">
+      <Modal
+        isOpen
+        /* eslint-disable no-void */
+        onClose={() => void 0}
+        size="lg"
+        blockScrollOnMount={false}
+        trapFocus={false}
+      >
+        <ModalOverlay />
+        <ModalContent borderRadius="2xl" mx="4">
+          <ModalBody>
+            <Stack
+              maxW="xs"
+              mx="auto"
+              py={{
+                base: '12',
+                md: '16',
+              }}
+              spacing={{
+                base: '6',
+                md: '5',
+              }}
+            >
+              <Stack spacing="3" textAlign="center">
+                <Stack align="center" spacing={2}>
+                  <Icon as={NotificationIcon} w={20} h={20} />
+                  <Heading
+                    textTransform="uppercase"
+                    fontSize="3xl"
+                    color={useColorModeValue('gray.800', 'gray.200')}
+                  >
+                    send invite
+                  </Heading>
+                  <Text fontSize="lg" color="gray.500">
+                    Want to invite your friends?
+                  </Text>
+                </Stack>
+              </Stack>
+              <Link
+                href="https://wa.me/?text=Are%20You%20Tired%20of%20Getting%20Embarrassing%20WhatsApp%20Status%20Views%3F%20%F0%9F%98%B3%F0%9F%98%B3%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%91%89%20https%3A%2F%2Fgrowursocials.com"
+                isExternal
+                textAlign="center"
+              >
+                <Button
+                  onClick={handleShare}
+                  p={4}
+                  variant="link"
+                  bg="whatsapp.400"
+                  color="white"
+                  _hover={{ bg: 'whatsapp' }}
+                  _focus={{ bg: 'whatsapp' }}
+                >
+
+                  Share on whatsapp
+                </Button>
+              </Link>
+            </Stack>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    </Box>
+  );
+}
+
 function Downloads() {
   const [availableDownloads, setAvailableDownloads] = useState([]);
   const [page, setPage] = useState(0);
+  const [showShare, setShowShare] = useState(false);
   const toast = useToast();
+  const location = useLocation();
 
   useEffect(() => {
+    gusServices.getUser();
+    setShowShare(true);
+
     gusServices
       .getVcards()
       .then((response) => {
@@ -281,32 +452,32 @@ function Downloads() {
       });
   }, [toast, setAvailableDownloads]);
 
-  useEffect(() => {
-    gusServices.getUser();
-  }, []);
-
   return (
-    <Box className="App">
-      <QuoteView />
-      <Box textAlign="left" m={5} ml={1} p={5}>
-        <Heading fontSize="3xl">
-          <Icon as={FaListUl} boxSize={5} />
+    showShare && location.state?.prevPath === '/register'
+      ? <ShareCardCTA handleShare={() => setShowShare(false)} />
+      : (
+        <Box className="App">
+          <QuoteView />
+          <Box textAlign="left" m={5} ml={1} p={5}>
+            <Heading fontSize="3xl">
+              <Icon as={FaListUl} boxSize={5} />
           &nbsp;Download List
-        </Heading>
-        <Text mt={2} fontSize="lg" color="gray.600">
-          Here is a list of previously compiled vCards files for you
-          to download if you want.
-        </Text>
-      </Box>
+            </Heading>
+            <Text mt={2} fontSize="lg" color="gray.600">
+              Here is a list of previously compiled vCards files for you
+              to download if you want.
+            </Text>
+          </Box>
 
-      {(availableDownloads.length && (
-        <DownloadTable
-          availableDownloads={availableDownloads}
-          page={page}
-          setPage={setPage}
-        />
-      )) || <Text m={3}>No available downloads</Text>}
-    </Box>
+          {(availableDownloads.length && (
+          <DownloadTable
+            availableDownloads={availableDownloads}
+            page={page}
+            setPage={setPage}
+          />
+          )) || <Text m={3}>No available downloads</Text>}
+        </Box>
+      )
   );
 }
 

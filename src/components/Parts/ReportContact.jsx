@@ -22,8 +22,6 @@ function ReportContact() {
 
   const handleReport = (event) => {
     event.preventDefault();
-
-    console.log(reason, reportContactNumber, reportContactName);
     const reportDetails = qs.stringify({
       'entry.2005620554': reportContactName,
       'entry.1045781291': reportContactNumber,
@@ -34,27 +32,16 @@ function ReportContact() {
       .post(
         'https://docs.google.com/forms/d/e/1FAIpQLSeEYlddVHJnDLJ3SxLpUVfqyWiA-8EqN5pln_L03kOfnsl_rg/formResponse',
         reportDetails,
-      )
-      .then(() => {
-        toast({
-          title: 'Thanks for reporting the contact. Our team will look into the report.',
-          status: 'info',
-          duration: 7000,
-          isClosable: true,
-        });
-        setReportContactName('');
-        setReportContactNumber('');
-        setReason('');
-      })
-      .catch((err) => {
-        toast({
-          title: err.response.data?.message || err.message,
-          status: 'error',
-          variant: 'subtle',
-          duration: 10000,
-          isClosable: true,
-        });
-      });
+      );
+    toast({
+      title: 'Thanks for reporting the contact. Our team will look into the report.',
+      status: 'info',
+      duration: 7000,
+      isClosable: true,
+    });
+    setReportContactName('');
+    setReportContactNumber('');
+    setReason('');
   };
 
   return (

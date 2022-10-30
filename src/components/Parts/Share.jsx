@@ -24,7 +24,7 @@ function Share() {
         </Text>
         <Button colorScheme="whatsapp" m="2" variant="link">
           <Link
-            href="https://wa.me/?text=text=Are%20You%20Tired%20of%20Getting%20Embarrassing%20WhatsApp%20Status%20Views%3F%20%F0%9F%98%B3%F0%9F%98%B3%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%91%89%20https%3A%2F%2Fgrowursocials.com"
+            href="https://wa.me/?text=Are%20You%20Tired%20of%20Getting%20Embarrassing%20WhatsApp%20Status%20Views%3F%20%F0%9F%98%B3%F0%9F%98%B3%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%91%89%20https%3A%2F%2Fgrowursocials.com"
             isExternal
           >
             <FaWhatsapp size={30} />
@@ -32,7 +32,7 @@ function Share() {
         </Button>
         <Button colorScheme="facebook" m="2" variant="link">
           <Link
-            href="https://www.facebook.com/sharer/sharer.php?url=https://growursocials/?text=text=Are%20You%20Tired%20of%20Getting%20Embarrassing%20WhatsApp%20Status%20Views%3F%20%F0%9F%98%B3%F0%9F%98%B3%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%91%89%20https%3A%2F%2Fgrowursocials.com"
+            href="https://www.facebook.com/sharer/sharer.php?url=https://growursocials/?text=Are%20You%20Tired%20of%20Getting%20Embarrassing%20WhatsApp%20Status%20Views%3F%20%F0%9F%98%B3%F0%9F%98%B3%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%91%89%20https%3A%2F%2Fgrowursocials.com"
             isExternal
           >
             <FaFacebook size={30} />
@@ -40,7 +40,7 @@ function Share() {
         </Button>
         <Button colorScheme="twitter" m="2" variant="link">
           <Link
-            href="https://twitter.com/intent/tweet?text=text=Are%20You%20Tired%20of%20Getting%20Embarrassing%20WhatsApp%20Status%20Views%3F%20%F0%9F%98%B3%F0%9F%98%B3%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%91%89%20https%3A%2F%2Fgrowursocials.com"
+            href="https://twitter.com/intent/tweet?text=Are%20You%20Tired%20of%20Getting%20Embarrassing%20WhatsApp%20Status%20Views%3F%20%F0%9F%98%B3%F0%9F%98%B3%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%91%89%20https%3A%2F%2Fgrowursocials.com"
             isExternal
           >
             <FaTwitter size={30} />
