@@ -78,10 +78,20 @@ function Register() {
           });
           return;
         }
+        toast({
+          title: 'Registration Successful',
+          description: 'Your contact is registered!',
+          status: 'success',
+          variant: 'subtle',
+          duration: 7000,
+          isClosable: true,
+        });
         setShowAlert(true);
         setCountry(country);
         if (values.package === 'premium') {
           navigate('/go-premium');
+        } else {
+          navigate('/downloads');
         }
       })
       .catch((err) => {
