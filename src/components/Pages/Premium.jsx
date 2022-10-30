@@ -17,6 +17,7 @@ import {
 
 } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import 'yup-phone';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -27,6 +28,8 @@ import * as gusServices from '../../services/gusServices';
 function PremiumPlan() {
   const [showAlert, setShowAlert] = useState(false);
   const toast = useToast();
+  const navigate = useNavigate();
+
   const signInFormSchema = yup.object().shape({
     name: yup.string().min(3, 'Name must be at least 3 characters').max(50, 'Name cannot be more than 50 characters').required('Name is required'),
     phone: yup.string().phone(undefined, undefined, 'Please enter a valid phone number').required('Phone number is required'),
@@ -51,13 +54,6 @@ function PremiumPlan() {
       ...values,
       metadata: {
         ...values,
-        custom_fields: [
-          {
-            display_name: values.name,
-            variable_name: values.name,
-            value: values.phone,
-          },
-        ],
       },
       key: 'pk_test_3baa29676132d0f704cc5a21a3a764d9697fc606',
       amount: 2000 * 100,
@@ -74,16 +70,16 @@ function PremiumPlan() {
       onSuccess: (transaction) => {
         const message = `Payment complete! Reference: ${transaction.reference}`;
 
-        fetch(`http://localhost:5000/api/payment/verify/${transaction.reference}`).then((res) => res.json()).then(console.log).catch(console.error);
-        alert(message);
+        fetch(`http://localhost:5000/api/payment/verify/${transaction.reference}`);
         toast({
-          title: 'message',
+          title: message,
           position: 'top',
           status: 'success',
           variant: 'subtle',
           duration: 7000,
           isClosable: true,
         });
+        navigate('/downloads');
       },
     });
   };

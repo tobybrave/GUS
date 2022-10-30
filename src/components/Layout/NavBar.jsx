@@ -4,14 +4,15 @@ import {
 import { Link as RouterLink } from 'react-router-dom';
 import React, { useState } from 'react';
 import { CgMenu, CgClose } from 'react-icons/cg';
+import Logo from '../Parts/Logo';
 
-export function Logo(props) {
-  return (
-    <Box {...props}>
-      <Text fontSize="lg" fontWeight="bold">GUS🍧</Text>
-    </Box>
-  );
-}
+// export function Logo(props) {
+//   return (
+//     <Box {...props}>
+//       <Text fontSize="lg" fontWeight="bold">GUS🍧</Text>
+//     </Box>
+//   );
+// }
 
 export function MenuToggle({ toggle, isOpen }) {
   return (
@@ -67,7 +68,7 @@ export function NavBarContainer({ children, ...props }) {
       wrap="wrap"
       w="100%"
       // mb={8}
-      p={5}
+      p={2}
       // bg={['primary.500', 'primary.500', 'transparent', 'transparent']} initial bg and color
       // color={['white', 'white', 'primary.700', 'primary.700']} #1b2d38
       bg={['white', 'white', 'transparent', 'transparent']}
@@ -85,7 +86,7 @@ function NavBar() {
 
   return (
     <NavBarContainer>
-      <Logo w="100px" color="#1b2d38" />
+      <Logo />
       <MenuToggle toggle={toggle} isOpen={isOpen} />
       <MenuLinks toggle={toggle} isOpen={isOpen} />
     </NavBarContainer>

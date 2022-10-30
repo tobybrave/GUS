@@ -3,7 +3,7 @@ import React from 'react';
 
 function TOS() {
   return (
-    <Box className="left-align">
+    <Box m={5} className="left-align">
       <Heading textAlign="center" fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }}>
         <Text
           as="span"

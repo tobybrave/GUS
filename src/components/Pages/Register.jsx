@@ -20,7 +20,7 @@ import {
   Select,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import * as yup from 'yup';
 import 'yup-phone';
@@ -37,6 +37,7 @@ function Register() {
   const [serverError, setServerError] = useState(false);
 
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const toast = useToast();
 
   const signInFormSchema = yup.object().shape({
@@ -91,7 +92,7 @@ function Register() {
         if (values.package === 'premium') {
           navigate('/go-premium');
         } else {
-          navigate('/downloads');
+          navigate('/downloads', { state: { prevPath: pathname } });
         }
       })
       .catch((err) => {
