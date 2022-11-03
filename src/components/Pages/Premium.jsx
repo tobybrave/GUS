@@ -140,7 +140,7 @@ function PremiumPlan() {
             <Stack spacing={4}>
 
               <FormControl id="name" isInvalid={!!errors.name}>
-                <FormLabel>Name</FormLabel>
+                <FormLabel fontWeight="semibold">Name</FormLabel>
                 <Input
                   type="text"
                   disabled
@@ -160,7 +160,7 @@ function PremiumPlan() {
                 )}
               </FormControl>
               <FormControl id="phone" isInvalid={!!errors.phone}>
-                <FormLabel>Phone</FormLabel>
+                <FormLabel fontWeight="semibold">Phone</FormLabel>
                 <Input
                   disabled
                   type="tel"
@@ -181,7 +181,7 @@ function PremiumPlan() {
               </FormControl>
 
               <FormControl id="email" isInvalid={!!errors.email}>
-                <FormLabel>Email</FormLabel>
+                <FormLabel fontWeight="semibold">Email</FormLabel>
 
                 <Input
                   type="email"
