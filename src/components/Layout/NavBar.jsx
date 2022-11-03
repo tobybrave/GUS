@@ -1,5 +1,5 @@
 import {
-  Box, Flex, Link, Stack, Text,
+  Box, Flex, Link, Stack, Text, useColorModeValue,
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import React, { useState } from 'react';
@@ -70,7 +70,8 @@ export function NavBarContainer({ children, ...props }) {
       p={2}
       // bg={['primary.500', 'primary.500', 'transparent', 'transparent']} initial bg and color
       // color={['white', 'white', 'primary.700', 'primary.700']} #1b2d38
-      bg={['white', 'white', 'transparent', 'transparent']}
+      bg={[useColorModeValue('white', 'gray.700'), useColorModeValue('white', 'gray.700'), 'transparent', 'transparent']}
+      boxShadow="md"
       color="#1b2d38"
       {...props}
     >
