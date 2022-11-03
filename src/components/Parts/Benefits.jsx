@@ -53,7 +53,7 @@ function Benefits() {
         <ListItem>
           <ListIcon as={MdCheckCircle} boxSize={5} color="green.500" />
           <Text as="span" fontSize="xl">
-            Monetize your content by charging your loyal readers
+            Monetize your content by charging your loyal viewers
           </Text>
         </ListItem>
       </List>
