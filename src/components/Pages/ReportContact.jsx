@@ -11,8 +11,9 @@ import {
   Stack,
   useColorModeValue,
   Textarea,
+  useToast,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
@@ -20,7 +21,7 @@ import qs from 'qs';
 import axios from 'axios';
 
 export default function Report() {
-  // const toast = useToast();
+  const toast = useToast();
 
   const phoneRegExp = /^\+(?:[0-9] ?){6,14}[0-9]$/;
   const signInFormSchema = yup.object().shape({
@@ -30,7 +31,7 @@ export default function Report() {
   });
 
   const {
-    register, handleSubmit, formState: { errors }, formState,
+    register, handleSubmit, reset, formState: { errors }, formState,
   } = useForm({
     resolver: yupResolver(signInFormSchema),
     defaultValues: {
@@ -51,20 +52,20 @@ export default function Report() {
       .post(
         'https://docs.google.com/forms/d/e/1FAIpQLSeEYlddVHJnDLJ3SxLpUVfqyWiA-8EqN5pln_L03kOfnsl_rg/formResponse',
         reportDetails,
-      ).then((res) => console.log(res)).catch((err) => console.error(err));
-    // toast({
-    //   title: 'Thanks for reporting the contact. Our team will look into the report.',
-    //   status: 'info',
-    //   duration: 7000,
-    //   isClosable: true,
-    // });
+      );
+    toast({
+      title: 'Thanks for reporting the contact. Our team will look into the report.',
+      status: 'info',
+      duration: 7000,
+      isClosable: true,
+    });
   };
 
-  // useEffect(() => {
-  //   if (formState.isSubmitted && formState.isSubmitSuccessful) {
-  //     reset();
-  //   }
-  // }, [formState, reset]);
+  useEffect(() => {
+    if (formState.isSubmitted && formState.isSubmitSuccessful) {
+      reset();
+    }
+  }, [formState, reset]);
 
   return (
     <Box m={5} className="App">
