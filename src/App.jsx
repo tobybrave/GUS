@@ -7,9 +7,9 @@ import Home from './components/Pages/Home';
 import Downloads from './components/Pages/Downloads';
 import Installation from './components/Pages/Installation';
 import Terms from './components/Pages/Terms';
-import ContactUs from './components/Pages/ContactUs';
 import Register from './components/Pages/Register';
 import Premium from './components/Pages/Premium';
+import Report from './components/Pages/ReportContact';
 import './App.css';
 
 function App() {
@@ -19,11 +19,10 @@ function App() {
         <Route index element={<Home />} />
         <Route path="register" element={<Register />} />
         <Route path="go-premium" element={<Premium />} />
-
         <Route path="downloads" element={<Downloads />} />
         <Route path="how-to-install" element={<Installation />} />
         <Route path="terms-of-service" element={<Terms />} />
-        <Route path="/contact-us" element={<ContactUs />} />
+        <Route path="/report" element={<Report />} />
         <Route path="*" element={<Home />} />
       </Route>
     </Routes>

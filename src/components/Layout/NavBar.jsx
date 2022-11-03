@@ -51,8 +51,7 @@ export function MenuLinks({ isOpen, toggle }) {
         <MenuItem toggle={toggle} to="/downloads">Downloads</MenuItem>
         <MenuItem toggle={toggle} to="/how-to-install">How to Install</MenuItem>
         <MenuItem toggle={toggle} to="/terms-of-service">Terms of service</MenuItem>
-        <MenuItem toggle={toggle} to="/contact-us">Contact Us</MenuItem>
-
+        <MenuItem toggle={toggle} to="/report">Report Contact</MenuItem>
       </Stack>
     </Box>
 
