@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Box,
+  Flex,
   ListItem,
   ListIcon,
   List,
@@ -11,8 +11,12 @@ import { MdCheckCircle } from 'react-icons/md';
 
 function Benefits() {
   return (
-    <Box m={5}>
-      <Heading fontSize="3xl" fontWeight={600} textAlign="left">
+    <Flex
+      m={5}
+      align="center"
+      justify="center"
+    >
+      <Heading fontSize="2xl" fontWeight={600} fontStyle="italic">
         Benefits
       </Heading>
       <List spacing={5}>
@@ -53,7 +57,7 @@ function Benefits() {
           </Text>
         </ListItem>
       </List>
-    </Box>
+    </Flex>
   );
 }
 
