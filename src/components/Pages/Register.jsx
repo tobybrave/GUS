@@ -162,7 +162,7 @@ function Register() {
           >
             <Stack spacing={4}>
               <FormControl id="package" isInvalid={!!errors.package}>
-                <FormLabel>Package</FormLabel>
+                <FormLabel fontWeight="semibold">Package</FormLabel>
                 <Select
                   bg="gray.100"
                   color="gray.500"
@@ -180,7 +180,7 @@ function Register() {
               </FormControl>
 
               <FormControl id="name" isInvalid={!!errors.name}>
-                <FormLabel>Name</FormLabel>
+                <FormLabel fontWeight="semibold">Name</FormLabel>
                 <Input
                   type="text"
                   placeholder="Enter name"
@@ -196,7 +196,7 @@ function Register() {
                 )}
               </FormControl>
               <FormControl id="phone" isInvalid={!!errors.phone}>
-                <FormLabel>Phone</FormLabel>
+                <FormLabel fontWeight="semibold">Phone</FormLabel>
                 <Box display="flex">
                   <CountryCodes
                     country={country}
@@ -221,7 +221,7 @@ function Register() {
               </FormControl>
 
               <FormControl id="password" isInvalid={!!errors.password}>
-                <FormLabel>Password</FormLabel>
+                <FormLabel fontWeight="semibold">Password</FormLabel>
                 <InputGroup>
                   <Input
                     type={showPassword ? 'text' : 'password'}
