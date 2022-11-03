@@ -12,6 +12,7 @@ import {
   useColorModeValue,
   Textarea,
   useToast,
+  FormHelperText,
 } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import * as yup from 'yup';
@@ -68,7 +69,7 @@ export default function Report() {
   }, [formState, reset]);
 
   return (
-    <Box m={5} className="App">
+    <Box m={5}>
       <Flex
         minH="100vh"
         align="center"
@@ -112,25 +113,24 @@ export default function Report() {
                 )}
               </FormControl>
               <FormControl id="phone" isInvalid={!!errors.phone}>
-                <FormLabel>Contact Phone</FormLabel>
-                <Box display="flex">
-                  <Input
-                    type="tel"
-                    placeholder="Enter contact phone number with zip code"
-                    bg="gray.100"
-                    color="gray.500"
-                    _placeholder={{
-                      color: 'gray.500',
-                    }}
-                    {...register('phone')}
-                  />
-                </Box>
+                <FormLabel fontWeight="semibold">Contact Phone</FormLabel>
+                <FormHelperText color="gray.600">Include the zip code</FormHelperText>
+                <Input
+                  type="tel"
+                  placeholder="Enter contact phone number with zip code"
+                  bg="gray.100"
+                  color="gray.500"
+                  _placeholder={{
+                    color: 'gray.500',
+                  }}
+                  {...register('phone')}
+                />
                 {!!errors.phone && (
                   <FormErrorMessage>{errors.phone.message}</FormErrorMessage>
                 )}
               </FormControl>
               <FormControl id="reason" isInvalid={!!errors.reason}>
-                <FormLabel>Reason</FormLabel>
+                <FormLabel fontWeight="semibold">Reason</FormLabel>
                 <Textarea
                   placeholder="Tell us why you are reporting this contact"
                   bg="gray.100"
