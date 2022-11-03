@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
-import ReportContact from '../Parts/ReportContact';
 import Benefits from '../Parts/Benefits';
 import PackagesDiff from '../Parts/Packages';
 import Procedures from '../Parts/Procedures';
@@ -15,7 +14,6 @@ function Home() {
       <PackagesDiff />
       <Procedures />
       <Share />
-      <ReportContact />
     </Box>
   );
 }

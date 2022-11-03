@@ -1,6 +1,5 @@
 import {
   Box,
-  // Container,
   Link,
   Heading,
   Spacer,
@@ -26,10 +25,10 @@ function Footer() {
         <Heading size="md">Follow and contact us</Heading>
         <Spacer />
         <HStack spacing={5} margin={3}>
-          <Link href="https://twitter.com/growursocials">
+          <Link to="/">
             <FaTwitter size={35} />
           </Link>
-          <Link href="https://www.facebook.com/growursocials">
+          <Link to="/">
             <FaFacebook size={35} />
           </Link>
           <Link href="mailto:help@growursocials.com">
@@ -45,7 +44,6 @@ function Footer() {
           any GUS contact is at your discretion.
         </Text>
       </Flex>
-      {/* </Container> */}
     </Box>
   );
 }
