@@ -403,6 +403,7 @@ export function ShareCardCTA({ handleShare }) {
                 href="https://wa.me/?text=Are%20You%20Tired%20of%20Getting%20Embarrassing%20WhatsApp%20Status%20Views%3F%20%F0%9F%98%B3%F0%9F%98%B3%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%91%89%20https%3A%2F%2Fgrowursocials.com"
                 isExternal
                 textAlign="center"
+                _hover={{ textDecoration: 'none' }}
               >
                 <Button
                   onClick={handleShare}
@@ -410,8 +411,6 @@ export function ShareCardCTA({ handleShare }) {
                   variant="link"
                   bg="whatsapp.400"
                   color="white"
-                  _hover={{ bg: 'whatsapp' }}
-                  _focus={{ bg: 'whatsapp' }}
                 >
 
                   Share on whatsapp

@@ -101,7 +101,7 @@ export function PricingCard(props) {
 export function ActionButton(props) {
   const { path } = props;
   return (
-    <Link as={ReactLink} to={path || '/register'}>
+    <Link as={ReactLink} to={path || '/register'} _hover={{ textDecoration: 'none' }}>
       <Button
         colorScheme="blue"
         size="lg"

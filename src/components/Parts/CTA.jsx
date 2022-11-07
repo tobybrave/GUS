@@ -2,8 +2,11 @@ import React from 'react';
 import {
   Button,
   Container,
-  Flex, Heading, Icon,
-  Stack, Text,
+  Flex,
+  Heading,
+  Icon,
+  Stack,
+  Text,
   Link,
 } from '@chakra-ui/react';
 import { FaDownload, FaEdit } from 'react-icons/fa';
@@ -837,7 +840,7 @@ export default function CallToActionWithIllustration() {
         textAlign="center"
         align="center"
         spacing={{ base: 8, md: 10 }}
-        py={{ base: 20, md: 28 }}
+        py={{ base: 20, md: 20 }}
       >
         <Heading
           fontWeight={600}
@@ -858,7 +861,7 @@ export default function CallToActionWithIllustration() {
           one click
         </Text>
         <Stack spacing={6} direction="row">
-          <Link as={ReactLink} to="/register">
+          <Link as={ReactLink} to="/register" _hover={{ textDecoration: 'none' }}>
             <Button
               leftIcon={<FaEdit />}
               rounded="full"
@@ -870,7 +873,7 @@ export default function CallToActionWithIllustration() {
               Register
             </Button>
           </Link>
-          <Link as={ReactLink} to="/downloads">
+          <Link as={ReactLink} to="/downloads" _hover={{ textDecoration: 'none' }}>
             <Button
               leftIcon={<FaDownload />}
               rounded="full"

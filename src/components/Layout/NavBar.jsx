@@ -26,7 +26,16 @@ export function MenuItem({
   children, isLast, to = '/', toggle, ...rest
 }) {
   return (
-    <Link as={RouterLink} to={to} onClick={toggle}>
+    <Link
+      as={RouterLink}
+      to={to}
+      onClick={toggle}
+      color={useColorModeValue('gray.600', 'gray.200')}
+      _hover={{
+        textDecoration: 'none',
+        color: useColorModeValue('gray.800', 'white'),
+      }}
+    >
       <Text display="block" {...rest}>{children}</Text>
     </Link>
   );
