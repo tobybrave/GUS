@@ -10,10 +10,14 @@ import {
   Stack,
   HStack,
   useColorModeValue,
+  useClipboard,
 } from '@chakra-ui/react';
 import { FaFacebook, FaTwitter, FaWhatsapp } from 'react-icons/fa';
 
 export default function Share() {
+  const placeholder = 'Are You Tired of Getting Embarrassing WhatsApp Status Views?\n     🤷🏻‍♂️🤷🏻‍♂️\nVisit https://growursocials.com';
+  const { hasCopied, onCopy } = useClipboard(placeholder);
+
   return (
     <Flex
       // minH="50vh"
@@ -38,10 +42,9 @@ export default function Share() {
           <Textarea
             isReadOnly
             _placeholder={{ color: 'gray.500' }}
-            placeholder={
-                  'Are You Tired of Getting Embarrassing WhatsApp Status Views?\n     🤷🏻‍♂️🤷🏻‍♂️\nVisit https://growursocials.com'
-                }
+            placeholder={placeholder}
           />
+          <Flex direction="row-reverse"><Button m={2} onClick={onCopy}>{hasCopied ? 'copied!' : 'copy'}</Button></Flex>
         </FormControl>
         <Text
           fontWeight="semibold"
