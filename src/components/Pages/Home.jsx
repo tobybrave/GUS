@@ -5,12 +5,14 @@ import PackagesDiff from '../Parts/Packages';
 import Procedures from '../Parts/Procedures';
 import Share from '../Parts/Share';
 import CallToActionWithIllustration from '../Parts/CTA';
+import Carousel from '../Parts/Carousel';
 
 function Home() {
   return (
     <Box className="App">
       <CallToActionWithIllustration />
       <Benefits />
+      <Carousel />
       <PackagesDiff />
       <Procedures />
       <Share />
