@@ -4,15 +4,15 @@ import {
 import { Link as RouterLink } from 'react-router-dom';
 import React, { useState } from 'react';
 import { CgMenu, CgClose } from 'react-icons/cg';
-import Logo from '../Parts/Logo';
+import { GusLogo } from '../Icons/icons';
 
-// export function Logo(props) {
-//   return (
-//     <Box {...props}>
-//       <Text fontSize="lg" fontWeight="bold">GUS🍧</Text>
-//     </Box>
-//   );
-// }
+export function Logo() {
+  return (
+    <Link as={RouterLink} to="/">
+      <GusLogo />
+    </Link>
+  );
+}
 
 export function MenuToggle({ toggle, isOpen }) {
   return (
