@@ -28,7 +28,7 @@ export const getUser = () => {
   return customer;
 };
 
-export const getVcards = async () => axios.get(`${baseUrl}/vcards`);
+export const getVcards = async () => axios.get(`${baseUrl}/vcards`, config(token));
 
 export const getVcard = async (id, pass) => {
   const result = await axios({
