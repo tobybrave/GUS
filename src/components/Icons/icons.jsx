@@ -941,10 +941,10 @@ export function GusLogo() {
   return (
     <Icon
       id="svg"
-      version="1.1"
+      // version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       width="50%"
-      height="60.20408163265306"
+      height="50"
       viewBox="0, 0, 400,70.20408163265306"
     >
       <g id="svgg">
