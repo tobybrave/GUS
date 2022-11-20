@@ -41,7 +41,7 @@ export function MenuItem({
   );
 }
 
-export function MenuLinks({ isOpen, toggle }) {
+export function MenuLinks({ isOpen, toggle, user }) {
   return (
     <Box
       display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
@@ -55,12 +55,24 @@ export function MenuLinks({ isOpen, toggle }) {
         pt={[4, 4, 0, 0]}
       >
         <MenuItem toggle={toggle} to="/">Home</MenuItem>
-        <MenuItem toggle={toggle} to="/register">Register</MenuItem>
-        <MenuItem toggle={toggle} to="/go-premium">Go Premium</MenuItem>
-        <MenuItem toggle={toggle} to="/downloads">Downloads</MenuItem>
+        {
+        user
+          ? (
+            <>
+              <MenuItem toggle={toggle} to="/go-premium">Go Premium</MenuItem>
+              <MenuItem toggle={toggle} to="/downloads">Downloads</MenuItem>
+              <MenuItem toggle={toggle} to="/report">Report Contact</MenuItem>
+            </>
+          )
+          : (
+            <>
+              <MenuItem toggle={toggle} to="/login">Login</MenuItem>
+              <MenuItem toggle={toggle} to="/register">Register</MenuItem>
+            </>
+          )
+        }
         <MenuItem toggle={toggle} to="/how-to-install">How to Install</MenuItem>
         <MenuItem toggle={toggle} to="/terms-of-service">Terms of service</MenuItem>
-        <MenuItem toggle={toggle} to="/report">Report Contact</MenuItem>
       </Stack>
     </Box>
 
@@ -89,7 +101,7 @@ export function NavBarContainer({ children, ...props }) {
   );
 }
 
-function NavBar() {
+function NavBar({ user }) {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
@@ -97,7 +109,7 @@ function NavBar() {
     <NavBarContainer>
       <Logo />
       <MenuToggle toggle={toggle} isOpen={isOpen} />
-      <MenuLinks toggle={toggle} isOpen={isOpen} />
+      <MenuLinks toggle={toggle} isOpen={isOpen} user={user} />
     </NavBarContainer>
   );
 }

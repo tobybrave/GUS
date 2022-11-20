@@ -11,22 +11,22 @@ import {
   Stack,
   useColorModeValue,
   useToast,
-  Alert,
-  AlertIcon,
-  AlertTitle,
+  // Alert,
+  // AlertIcon,
+  // AlertTitle,
 
 } from '@chakra-ui/react';
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import 'yup-phone';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import PaystackPop from '@paystack/inline-js';
-import * as gusServices from '../../services/gusServices';
+import { useAuth } from '../../hooks/useAuth';
 
 function PremiumPlan() {
-  const [showAlert, setShowAlert] = useState(false);
+  const { user } = useAuth();
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -37,12 +37,12 @@ function PremiumPlan() {
   });
 
   const {
-    register, setValue, handleSubmit, formState: { errors }, formState,
+    register, handleSubmit, formState: { errors }, formState,
   } = useForm({
     resolver: yupResolver(signInFormSchema),
     defaultValues: {
-      name: '',
-      phone: '',
+      name: user ? user.name : '',
+      phone: user ? user.phone : '',
       email: '',
     },
   });
@@ -84,15 +84,9 @@ function PremiumPlan() {
     });
   };
 
-  useEffect(() => {
-    const isUser = gusServices.getUser();
-    if (isUser) {
-      setValue('name', isUser.name);
-      setValue('phone', isUser.phone);
-    } else {
-      setShowAlert(true);
-    }
-  }, [setValue]);
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
 
   return (
     <Box m={5}>
@@ -104,7 +98,7 @@ function PremiumPlan() {
       >
 
         <Stack spacing={8} mx="auto" maxW="lg" py={12} px={6}>
-          {showAlert && (
+          {/* {showAlert && (
             <Alert
               status="info"
               variant="subtle"
@@ -121,12 +115,12 @@ function PremiumPlan() {
                 You&apos;re not a registered contact!!
               </AlertTitle>
             </Alert>
-          )}
+          )} */}
           <Stack align="center">
             <Heading id="register" fontSize="2xl" textAlign="center">
               Go Premium
             </Heading>
-            <Text fontSize="lg" color="gray.600">
+            <Text fontSize="lg" color="gray.600" textAlign="center">
               Kindly enter your email address below to make your payment to complete the process
             </Text>
           </Stack>
@@ -200,7 +194,6 @@ function PremiumPlan() {
               </FormControl>
               <Stack spacing={10} pt={2}>
                 <Button
-                  disabled={showAlert}
                   type="submit"
                   loadingText="Submitting"
                   size="lg"

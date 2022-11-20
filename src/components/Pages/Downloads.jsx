@@ -34,13 +34,13 @@ import {
   AlertIcon,
   AlertDescription,
   Link,
-  Image,
   Tooltip,
 } from '@chakra-ui/react';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Timer from '../Parts/Timer';
 import * as gusServices from '../../services/gusServices';
 import { QuoteIcon } from '../Icons/icons';
+import { useAuth } from '../../hooks/useAuth';
 
 const PAGE_SIZE = 10;
 const totalPages = (cards) => {
@@ -89,15 +89,17 @@ function Pagination({ page, setPage, maxPages }) {
 }
 
 function DownloadTable({ availableDownloads, page, setPage }) {
+  const { user } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [password, setPassword] = useState('');
   const [vcardId, setVcardId] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const initialRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleDownload = (id) => {
     gusServices
-      .getVcard(id, password)
+      .getVcard(id, password, user?.token)
       .then(() => {
         setErrorMessage('');
         onClose();
@@ -106,7 +108,7 @@ function DownloadTable({ availableDownloads, page, setPage }) {
         if (err.response?.status === 400) {
           setErrorMessage('Please provide a valid password. If you continue to have issues downloading contact, contact our Support team');
         } else {
-          setErrorMessage('Invalid user details. Kindly verify if you are registered');
+          navigate('/login', { replace: true });
         }
       });
   };
@@ -136,7 +138,7 @@ function DownloadTable({ availableDownloads, page, setPage }) {
                     >
                       <Icon as={FaAddressCard} mr="1" />
                       <Text>
-                        {`vcard for ${moment(card.createdAt).format('ll')}`}
+                        {`vcard for ${moment(card.createdAt).utc().format('ll')}`}
                       </Text>
                     </Button>
                   </Td>
@@ -252,7 +254,7 @@ export function QuoteView() {
           <Tooltip label="Not implemented yet">
             <Button colorScheme="whatsapp" variant="link">
               <Link
-                href="https://wa.me/?text=Are%20You%20Tired%20of%20Getting%20Embarrassing%20WhatsApp%20Status%20Views%3F%20%F0%9F%98%B3%F0%9F%98%B3%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%91%89%20https%3A%2F%2Fgrowursocials.com"
+                href="https://wa.me/?text=*Are%20You%20Tired%20of%20Getting%20Embarrassing%20WhatsApp%20Status%20Views?%20😢%20*%20%0A*DO%20YOU%20WANNA%20INCREASE%20YOUR%20WHATSAPP%20AUDIENCE%20FOR%20FREE???%20*%0AVISIT:%20www.growursocials.com"
               >
                 <FaWhatsapp size={40} />
               </Link>
@@ -306,7 +308,7 @@ export function ShareCardCTA({ handleShare }) {
                 </Stack>
               </Stack>
               <Link
-                href="https://wa.me/?text=Are%20You%20Tired%20of%20Getting%20Embarrassing%20WhatsApp%20Status%20Views%3F%20%F0%9F%98%B3%F0%9F%98%B3%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%91%89%20https%3A%2F%2Fgrowursocials.com"
+                href="https://wa.me/?text=*Are%20You%20Tired%20of%20Getting%20Embarrassing%20WhatsApp%20Status%20Views?%20😢%20*%20%0A*DO%20YOU%20WANNA%20INCREASE%20YOUR%20WHATSAPP%20AUDIENCE%20FOR%20FREE???%20*%0AVISIT:%20www.growursocials.com"
                 isExternal
                 textAlign="center"
                 _hover={{ textDecoration: 'none' }}
@@ -333,37 +335,38 @@ export function ShareCardCTA({ handleShare }) {
 }
 
 function Downloads() {
-  const [isUser, setIsUser] = useState(false);
+  const { user } = useAuth();
   const [availableDownloads, setAvailableDownloads] = useState([]);
   const [page, setPage] = useState(0);
   const [showShare, setShowShare] = useState(false);
+  const navigate = useNavigate();
   const toast = useToast();
   const location = useLocation();
 
   useEffect(() => {
-    const user = gusServices.getUser();
-    if (user) {
-      setIsUser(true);
+    if (location.state?.prevPath === '/register') {
+      setShowShare(true);
     }
-    setShowShare(true);
-
     gusServices
-      .getVcards()
+      .getVcards(user?.token)
       .then((response) => {
         setAvailableDownloads(response.data.vcards);
       })
       .catch((err) => {
+        if (err.response?.status === 401) {
+          navigate('/login', { replace: true });
+        }
         toast({
-          title: err?.response?.status === 401 ? 'Only registered contacts have access to this page' : 'An error occurred. Give it a try later!',
+          title: 'An error occurred. Give it a try later!',
           status: 'error',
           variant: 'subtle',
-          duration: 10000,
+          duration: 7000,
           isClosable: true,
         });
       });
   }, [toast, setAvailableDownloads]);
 
-  const toDisplay = isUser
+  const toDisplay = user
     ? (
       <Box className="App">
         <Timer />
@@ -388,14 +391,14 @@ function Downloads() {
         )) || <Text m={3}>No available downloads</Text>}
       </Box>
     )
-    : (
-      <Box objectFit="contain">
-        <Image src="/images/401.jpg" alt="401 error" />
-      </Box>
-    );
+    : <Navigate to="/login" replace />;
+    // : (
+    //   <Box objectFit="contain">
+    //     <Image src="/images/401.jpg" alt="401 error" />
+    //   </Box>
 
   return (
-    showShare && location.state?.prevPath === '/register'
+    showShare
       ? (
         <ShareCardCTA handleShare={() => {
           setShowShare(false);

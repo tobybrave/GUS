@@ -15,7 +15,7 @@ import {
 import { FaFacebook, FaTwitter, FaWhatsapp } from 'react-icons/fa';
 
 export default function Share() {
-  const placeholder = 'Are You Tired of Getting Embarrassing WhatsApp Status Views?\n     🤷🏻‍♂️🤷🏻‍♂️\nVisit https://growursocials.com';
+  const placeholder = '*Are You Tired of Getting Embarrassing WhatsApp Status Views? 😢 * \n*DO YOU WANNA INCREASE YOUR WHATSAPP AUDIENCE FOR FREE??? *\nVISIT: www.growursocials.com';
   const { hasCopied, onCopy } = useClipboard(placeholder);
 
   return (
@@ -56,7 +56,7 @@ export default function Share() {
         <HStack spacing={4} alignSelf="center">
           <Button colorScheme="whatsapp" variant="link">
             <Link
-              href="https://wa.me/?text=Are%20You%20Tired%20of%20Getting%20Embarrassing%20WhatsApp%20Status%20Views%3F%20%F0%9F%98%B3%F0%9F%98%B3%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%91%89%20https%3A%2F%2Fgrowursocials.com"
+              href="https://wa.me/?text=*Are%20You%20Tired%20of%20Getting%20Embarrassing%20WhatsApp%20Status%20Views?%20😢%20*%20%0A*DO%20YOU%20WANNA%20INCREASE%20YOUR%20WHATSAPP%20AUDIENCE%20FOR%20FREE???%20*%0AVISIT:%20www.growursocials.com"
               isExternal
             >
               <FaWhatsapp size={30} />
@@ -64,7 +64,7 @@ export default function Share() {
           </Button>
           <Button colorScheme="facebook" variant="link">
             <Link
-              href="https://www.facebook.com/sharer/sharer.php?u=https://growursocials/?quote=Are%20You%20Tired%20of%20Getting%20Embarrassing%20WhatsApp%20Status%20Views%3F%20%F0%9F%98%B3%F0%9F%98%B3%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%91%89%20https%3A%2F%2Fgrowursocials.com"
+              href="https://www.facebook.com/sharer/sharer.php?u=https://growursocials/?quote=*Are%20You%20Tired%20of%20Getting%20Embarrassing%20WhatsApp%20Status%20Views?%20😢%20*%20%0A*DO%20YOU%20WANNA%20INCREASE%20YOUR%20WHATSAPP%20AUDIENCE%20FOR%20FREE???%20*%0AVISIT:%20www.growursocials.com"
               isExternal
             >
               <FaFacebook size={30} />
@@ -72,7 +72,7 @@ export default function Share() {
           </Button>
           <Button colorScheme="twitter" variant="link">
             <Link
-              href="https://twitter.com/intent/tweet?text=Are%20You%20Tired%20of%20Getting%20Embarrassing%20WhatsApp%20Status%20Views%3F%20%F0%9F%98%B3%F0%9F%98%B3%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%A4%B7%F0%9F%8F%BB%E2%80%8D%E2%99%82%EF%B8%8F%F0%9F%91%89%20https%3A%2F%2Fgrowursocials.com"
+              href="https://twitter.com/intent/tweet?text=*Are%20You%20Tired%20of%20Getting%20Embarrassing%20WhatsApp%20Status%20Views?%20😢%20*%20%0A*DO%20YOU%20WANNA%20INCREASE%20YOUR%20WHATSAPP%20AUDIENCE%20FOR%20FREE???%20*%0AVISIT:%20www.growursocials.com"
               isExternal
             >
               <FaTwitter size={30} />

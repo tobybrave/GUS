@@ -2,35 +2,26 @@ import axios from 'axios';
 import { saveAs } from 'file-saver';
 
 const baseUrl = 'http://localhost:5000/api/v1';
-let token;
-const setToken = (newToken) => {
-  token = `Bearer ${newToken}`;
-};
 
 const config = (tokenValue) => ({
-  headers: { Authorization: tokenValue },
+  headers: { Authorization: `Bearer ${tokenValue}` },
 });
 
 export const register = async (customer) => {
   const response = await axios.post(`${baseUrl}/register`, customer);
-  localStorage.setItem('gus-customer', JSON.stringify(response.data.user));
-  setToken(response.data.user.token);
 
   return response;
 };
 
-export const getUser = () => {
-  const gusCustomer = localStorage.getItem('gus-customer');
-  const customer = JSON.parse(gusCustomer);
-  if (customer) {
-    setToken(customer.token);
-  }
-  return customer;
+export const login = async (user) => {
+  const response = await axios.post(`${baseUrl}/login`, user);
+
+  return response;
 };
 
-export const getVcards = async () => axios.get(`${baseUrl}/vcards`, config(token));
+export const getVcards = async (token) => axios.get(`${baseUrl}/vcards`, config(token));
 
-export const getVcard = async (id, pass) => {
+export const getVcard = async (id, pass, token) => {
   const result = await axios({
     method: 'post',
     url: `${baseUrl}/vcards/${id}`,

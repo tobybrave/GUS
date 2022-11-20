@@ -1,8 +1,8 @@
 import {
-  Alert,
-  AlertDescription,
-  AlertIcon,
-  AlertTitle,
+  // Alert,
+  // AlertDescription,
+  // AlertIcon,
+  // AlertTitle,
   Box,
   Button,
   FormControl,
@@ -20,7 +20,7 @@ import {
   Select,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import * as yup from 'yup';
 import 'yup-phone';
@@ -28,10 +28,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import CountryCodes from '../Parts/CountryCodes';
 import * as gusServices from '../../services/gusServices';
-import data from '../Parts/data';
+import data from '../../constants/data';
+import { useAuth } from '../../hooks/useAuth';
 
 function Register() {
-  const [showAlert, setShowAlert] = useState(false);
+  // const [showAlert, setShowAlert] = useState(false);
+  const { user, login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [country, setCountry] = useState('NG');
   const [serverError, setServerError] = useState(false);
@@ -61,24 +63,14 @@ function Register() {
 
   const handleRegister = async (values) => {
     const formatPhoneNumber = Number.parseInt(values.phone, 10);
-    const user = {
+    const userPayload = {
       name: values.name,
       phone: `${data[country]}${formatPhoneNumber}`,
       password: values.password,
     };
     gusServices
-      .register(user)
+      .register(userPayload)
       .then((response) => {
-        if (response.status === 200) {
-          toast({
-            title: 'Contact already exist',
-            status: 'info',
-            variant: 'subtle',
-            duration: 7000,
-            isClosable: true,
-          });
-          return;
-        }
         toast({
           title: 'Registration Successful',
           description: 'Your contact is registered!',
@@ -87,12 +79,11 @@ function Register() {
           duration: 7000,
           isClosable: true,
         });
-        setShowAlert(true);
         setCountry(country);
         if (values.package === 'premium') {
           navigate('/go-premium');
         } else {
-          navigate('/downloads', { state: { prevPath: pathname } });
+          login(response.data.user, pathname);
         }
       })
       .catch((err) => {
@@ -113,6 +104,9 @@ function Register() {
     }
   }, [formState, reset]);
 
+  if (user) {
+    return (<Navigate to="/downloads" replace />);
+  }
   return (
     <Box m={5}>
       <Flex
@@ -122,7 +116,7 @@ function Register() {
         bg={useColorModeValue('gray.50', 'gray.800')}
       >
         <Stack spacing={8} mx="auto" maxW="lg" py={12} px={6}>
-          {showAlert && (
+          {/* {showAlert && (
           <Alert
             status="success"
             variant="subtle"
@@ -142,12 +136,12 @@ function Register() {
               Account successfully created.
             </AlertDescription>
           </Alert>
-          )}
+          )} */}
           <Stack align="center">
             <Heading id="register" fontSize="2xl" textAlign="center">
               Submit your contact
             </Heading>
-            <Text fontSize="lg" color="gray.600">
+            <Text fontSize="lg" color="gray.600" textAlign="center">
               Submit your name and number to be compiled for download by
               yourself and others
             </Text>
@@ -248,7 +242,6 @@ function Register() {
               <Stack spacing={10} pt={2}>
                 <Button
                   type="submit"
-                  loadingText="Submitting"
                   size="lg"
                   bg="blue.400"
                   color="white"
