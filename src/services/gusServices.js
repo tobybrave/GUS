@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { saveAs } from 'file-saver';
 
-const baseUrl = 'http://localhost:5000/api/v1';
+const baseUrl = '/api/v1';
 
 const config = (tokenValue) => ({
   headers: { Authorization: `Bearer ${tokenValue}` },
