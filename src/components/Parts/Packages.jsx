@@ -2,11 +2,11 @@ import {
   Box, Button, Flex, Heading,
   Icon, Link, List, ListIcon, ListItem, SimpleGrid, Text, VStack, useColorModeValue,
 } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { SiHive, SiMarketo } from 'react-icons/si';
 import { HiCheckCircle } from 'react-icons/hi';
 import { Link as ReactLink } from 'react-router-dom';
-import * as gusServices from '../../services/gusServices';
+import { useAuth } from '../../hooks/useAuth';
 
 export function CardBadge(props) {
   const { children, ...flexProps } = props;
@@ -117,16 +117,8 @@ export function ActionButton(props) {
 }
 
 export default function PackagesDiff() {
-  const [isUser, setIsUser] = useState(false);
+  const { user } = useAuth();
 
-  useEffect(() => {
-    const user = gusServices.getUser();
-    if (user) {
-      setIsUser(true);
-    } else {
-      setIsUser(false);
-    }
-  });
   return (
     <Box
       as="section"
@@ -183,7 +175,7 @@ export default function PackagesDiff() {
           }}
           icon={SiMarketo}
           button={(
-            <ActionButton borderWidth="2px" path={isUser ? '/go-premium' : undefined}>
+            <ActionButton borderWidth="2px" path={user ? '/go-premium' : undefined}>
               Buy now
             </ActionButton>
         )}
