@@ -69,7 +69,7 @@ function PremiumPlan() {
       },
       onSuccess: (transaction) => {
         const message = `Payment complete! Reference: ${transaction.reference}`;
-        fetch(`http://localhost:5000/api/payment/verify/${transaction.reference}`);
+        fetch(`/api/payment/verify/${transaction.reference}`);
         toast({
           title: message,
           position: 'top',
