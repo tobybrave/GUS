@@ -55,7 +55,7 @@ function PremiumPlan() {
       metadata: {
         ...values,
       },
-      key: 'pk_live_8237ba59e110f2e08205ae7c5035b130ab56e0b3',
+      key: process.env.REACT_APP_PAYMENT_API_KEY,
       amount: 2000 * 100,
       onCancel: () => {
         toast({
